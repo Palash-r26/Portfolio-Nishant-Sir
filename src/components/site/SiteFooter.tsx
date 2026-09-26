@@ -4,7 +4,27 @@ import { profile } from "@/content/portfolio";
 
 export function SiteFooter() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const lenis = typeof window !== "undefined" ? (window as any).__lenis : null;
+    if (lenis) {
+      lenis.scrollTo(0);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const scrollToSection = (id: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== "undefined" && (window.location.pathname === "/" || window.location.pathname === "")) {
+      e.preventDefault();
+      const target = document.getElementById(id);
+      const lenis = (window as any).__lenis;
+      if (lenis && target) {
+        lenis.scrollTo(target, { offset: -70 });
+        window.history.pushState(null, "", `/#${id}`);
+      } else if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.pushState(null, "", `/#${id}`);
+      }
+    }
   };
 
   return (
@@ -30,14 +50,14 @@ export function SiteFooter() {
         <div className="footer-col footer-col-nav">
           <h4 className="footer-col-title">Navigation</h4>
           <nav aria-label="Footer navigation" className="footer-links-grid">
-            <a href="/#about">About</a>
-            <a href="/#research">Research Areas</a>
+            <a href="/#about" onClick={(e) => scrollToSection("about", e)}>About</a>
+            <a href="/#research" onClick={(e) => scrollToSection("research", e)}>Research Areas</a>
             <Link to="/publications">Publications</Link>
-            <a href="/#education">Education</a>
-            <a href="/#experience">Experience</a>
-            <a href="/#recognition">Recognition</a>
+            <a href="/#qualifications" onClick={(e) => scrollToSection("qualifications", e)}>Qualifications</a>
+            <a href="/#experience" onClick={(e) => scrollToSection("experience", e)}>Experience</a>
+            <a href="/#recognition" onClick={(e) => scrollToSection("recognition", e)}>Recognition</a>
             <Link to="/students">Student Research</Link>
-            <a href="/#contact">Contact</a>
+            <a href="/#contact" onClick={(e) => scrollToSection("contact", e)}>Contact</a>
           </nav>
         </div>
 

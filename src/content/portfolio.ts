@@ -66,9 +66,9 @@ export const qualifications = [
 ];
 
 export const experience = [
-  { period: "Jul 2024 — Present", role: "Assistant Professor", institution: "Madhav Institute of Technology & Science, Gwalior" },
-  { period: "Jan 2023 — Jun 2024", role: "Assistant Professor", institution: "Department of Computer Science & Engineering, Manipal University Jaipur" },
-  { period: "Aug 2017 — Jan 2023", role: "Teaching Assistant", institution: "Department of Computer Science & Engineering, IIT (ISM) Dhanbad" },
+  { period: "Jul 2024 - Present", role: "Assistant Professor", institution: "Madhav Institute of Technology & Science, Gwalior" },
+  { period: "Jan 2023 - Jun 2024", role: "Assistant Professor", institution: "Department of Computer Science & Engineering, Manipal University Jaipur" },
+  { period: "Aug 2017 - Jan 2023", role: "Teaching Assistant", institution: "Department of Computer Science & Engineering, IIT (ISM) Dhanbad" },
 ];
 
 export const researchAreas = [

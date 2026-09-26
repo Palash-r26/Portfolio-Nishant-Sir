@@ -19,10 +19,10 @@ export function PublicationsList({ compact = false }: { compact?: boolean }) {
 
   return <div>
     {!compact ? <div className="filter-bar" role="group" aria-label="Filter publications by type">{filters.map((item) => <Button key={item} type="button" variant="outline" size="sm" className={filter === item ? "filter-active" : ""} onClick={() => setFilter(item)} aria-pressed={filter === item}>{item}</Button>)}</div> : null}
-    <div className="publication-list" aria-live="polite">{visible.map((publication) => <article className="publication" key={publication.title}>
+    <div className="publication-list" aria-live="polite">{visible.map((publication) => <article className="publication sweep-hover" key={publication.title}>
       <div className="publication-meta"><span>{publication.year}</span><span>{publication.type}</span></div>
       <div><h3>{publication.title}</h3><p className="authors">{highlightOwner(publication.authors)}</p><p className="venue">{publication.venue}</p></div>
-      {publication.doi ? <a className="icon-link" href={publication.doi} target="_blank" rel="noopener noreferrer" aria-label={`Open DOI for ${publication.title}`}><ArrowUpRight /></a> : null}
+      {publication.doi ? <a className="icon-link corner-fill" href={publication.doi} target="_blank" rel="noopener noreferrer" aria-label={`Open DOI for ${publication.title}`}><ArrowUpRight /></a> : null}
     </article>)}</div>
   </div>;
 }

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { 
   ArrowDownRight, 
   ArrowRight, 
@@ -13,6 +14,7 @@ import {
   FileText 
 } from "lucide-react";
 import portrait from "@/assets/professor-portrait.png";
+import { HeroPortrait } from "@/components/site/HeroPortrait";
 import { MailIcon } from "@/components/site/Icons";
 import { PublicationsList } from "@/components/site/PublicationsList";
 import { Reveal } from "@/components/site/Reveal";
@@ -30,9 +32,9 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dr. Nishant Jain — Assistant Professor & AI Researcher" },
+      { title: "Dr. Nishant Jain | Assistant Professor & AI Researcher" },
       { name: "description", content: "Academic portfolio of Dr. Nishant Jain, Ph.D. from IIT (ISM) Dhanbad, Assistant Professor at MITS Gwalior, specializing in Explainable Machine Learning (XAI)." },
-      { property: "og:title", content: "Dr. Nishant Jain — Assistant Professor & AI Researcher" },
+      { property: "og:title", content: "Dr. Nishant Jain | Assistant Professor & AI Researcher" },
       { property: "og:description", content: "Research in Explainable Machine Learning, Random Forests, and Transparent AI at MITS Gwalior." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
@@ -54,64 +56,44 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-export function HomePage() {
+function HomePage() {
+  const [focusedCvIdx, setFocusedCvIdx] = useState<number | null>(null);
   return (
     <main className="main-content">
       {/* ============================================================
-          HERO SECTION (Image First on Mobile & Tablet)
+          HERO SECTION (Image First on Mobile & Tablet, Oversized Fraunces Typography)
           ============================================================ */}
       <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-mesh-glow" aria-hidden="true" />
+        <div className="hero-atmosphere" aria-hidden="true" />
         <div className="hero-inner">
           
-          {/* Portrait Container - Displays FIRST on Mobile & Tablet via CSS order */}
-          <div className="portrait-wrap">
-            <div className="portrait-card">
-              <div className="portrait-status-chip">
-                <span className="status-dot" />
-                <span>Active Faculty @ MITS Gwalior</span>
-              </div>
-              <div className="portrait-frame">
-                <img 
-                  src={portrait} 
-                  alt="Dr. Nishant Jain - Assistant Professor at MITS Gwalior" 
-                  width={912} 
-                  height={1200}
-                  className="portrait-img"
-                />
-              </div>
-              <div className="portrait-badge-bottom">
-                <strong>Ph.D. in CSE</strong>
-                <small>IIT (ISM) Dhanbad</small>
-              </div>
-            </div>
-          </div>
-
-          {/* Hero Copy (Name, Title, Credentials, Bio, Actions) */}
+          {/* Hero Copy (Oversized Fraunces Typography & Distinctive Layout) */}
           <div className="hero-copy">
-            <div className="hero-badge-pill">
-              <Sparkles size={14} className="badge-icon" />
-              <span>Explainable AI & Machine Learning Researcher</span>
+            <div className="hero-status-marker">
+              <svg className="marker-crosshair" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.2" />
+                <circle cx="8" cy="8" r="2" fill="currentColor" />
+                <path d="M8 0v3M8 13v3M0 8h3M13 8h3" stroke="currentColor" strokeWidth="1.2" />
+              </svg>
+              <span className="marker-label">FACULTY APPOINTMENT · MITS GWALIOR</span>
             </div>
 
-            <h1 id="hero-title" className="hero-name">
-              Dr. Nishant <span>Jain</span>
+            <h1 id="hero-title" className="hero-title-display">
+              <span className="display-prefix">Dr. Nishant</span>
+              <span className="display-surname">Jain</span>
             </h1>
 
-            <div className="hero-credentials">
-              <div className="credential-tag">
-                <GraduationCap size={15} />
-                <span>Ph.D., IIT (ISM) Dhanbad</span>
-              </div>
-              <div className="credential-tag">
-                <Award size={15} />
-                <span>5× GATE Qualified</span>
-              </div>
+            <div className="hero-credentials-bar">
+              <span className="cred-badge">PH.D. IIT (ISM) DHANBAD</span>
+              <span className="cred-sep">/</span>
+              <span className="cred-badge">5× GATE CSE QUALIFIED</span>
+              <span className="cred-sep">/</span>
+              <span className="cred-badge">EXPLAINABLE AI</span>
             </div>
 
-            <p className="hero-role-lead">
-              <strong>{profile.title}</strong> · {profile.department}
-              <span className="hero-institution">{profile.university}</span>
+            <p className="hero-role-title">
+              {profile.title}, {profile.department}
+              <span className="hero-univ">{profile.university}</span>
             </p>
 
             <p className="hero-tagline">
@@ -119,42 +101,44 @@ export function HomePage() {
             </p>
 
             <div className="action-row">
-              <a href="#research" className="primary-action">
+              <a href="#research" className="brass-primary-btn corner-fill">
                 <span>Explore Research</span>
-                <ArrowDownRight size={17} />
+                <svg className="btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3.33 8h9.34M8 3.33l4.67 4.67L8 12.67" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </a>
-              <a href="#qualifications" className="secondary-action">
-                <BookOpen size={16} />
-                <span>View Qualifications</span>
-              </a>
-              <a href={`mailto:${profile.email}`} className="ghost-action">
-                <Mail size={16} />
-                <span>Contact</span>
+              <a href="#qualifications" className="text-cta-link">
+                <span>Academic Credentials</span>
+                <span className="cta-rule" />
               </a>
             </div>
 
             <div className="hero-quick-meta">
-              <a href={`mailto:${profile.email}`} className="quick-chip">
-                <Mail size={13} />
+              <a href={`mailto:${profile.email}`} className="quick-item">
+                <span className="meta-dot" />
                 <span>{profile.email}</span>
               </a>
-              <span className="quick-chip">
-                <MapPin size={13} />
-                <span>Gwalior, MP, India</span>
+              <span className="quick-item">
+                <span className="meta-dot" />
+                <span>Gwalior, Madhya Pradesh, India</span>
               </span>
             </div>
           </div>
+
+          {/* Portrait Container with 3D Tilt from each corner (No diagonal sweep) */}
+          <HeroPortrait />
 
         </div>
       </section>
 
       {/* ============================================================
-          METRICS & HIGHLIGHTS STRIP
+          METRICS & HIGHLIGHTS RIBBON (Precision Monospace Accents)
           ============================================================ */}
       <section className="highlights-bar" aria-label="Key Achievements">
         <div className="highlights-inner">
-          {stats.map((stat) => (
+          {stats.map((stat, idx) => (
             <div key={stat.label} className="highlight-item">
+              <span className="highlight-idx">0{idx + 1}</span>
               <strong className="highlight-val">{stat.value}</strong>
               <span className="highlight-lbl">{stat.label}</span>
             </div>
@@ -163,31 +147,70 @@ export function HomePage() {
       </section>
 
       {/* ============================================================
-          ACADEMIC QUALIFICATIONS (Clear, High-Trust Degree Cards)
+          ACADEMIC QUALIFICATIONS (Vertical Academic CV Timeline)
+          Supports both #qualifications and #education navigation anchors
           ============================================================ */}
+      <div id="education" style={{ position: "relative", top: "-90px" }} aria-hidden="true" />
       <Reveal>
         <section id="qualifications" className="section qualifications-section">
           <SectionHeading 
             eyebrow="Academic Background" 
             title="Educational Qualifications & Credentials" 
-            intro="A solid academic trajectory founded on doctoral research from premier Indian institutions and national competitive excellence."
+            intro="A scholarly foundation formed through doctoral research at premier Indian institutes and repeated national competitive benchmarks."
           />
 
-          <div className="qualifications-grid">
-            {qualifications.map((item) => (
-              <article key={item.degree} className="qualification-card">
-                <div className="card-top-row">
-                  <span className="card-badge">{item.badge}</span>
-                  <span className="card-inst">{item.institution}</span>
-                </div>
-                <h3 className="card-degree">{item.degree}</h3>
-                <p className="card-details">{item.details}</p>
-                <div className="card-highlight">
-                  <CheckCircle2 size={15} className="highlight-icon" />
-                  <span>{item.highlight}</span>
-                </div>
-              </article>
-            ))}
+          <div className="timeline-cv-wrapper">
+            <div className="timeline-cv-line" aria-hidden="true" />
+            
+            <div 
+              className="timeline-cv-list"
+              onMouseLeave={() => setFocusedCvIdx(null)}
+            >
+              {qualifications.map((item, idx) => {
+                const isFocused = focusedCvIdx === idx;
+                const isAdjacent = focusedCvIdx !== null && Math.abs(focusedCvIdx - idx) === 1;
+                const isDistant = focusedCvIdx !== null && Math.abs(focusedCvIdx - idx) > 1;
+
+                const focusClass = isFocused ? "is-focused" : isAdjacent ? "is-adjacent" : isDistant ? "is-distant" : "";
+
+                return (
+                  <article 
+                    key={item.degree} 
+                    className={`cv-timeline-item ${focusClass}`}
+                    onMouseEnter={() => setFocusedCvIdx(idx)}
+                    onClick={() => setFocusedCvIdx((prev) => prev === idx ? null : idx)}
+                    tabIndex={0}
+                    onFocus={() => setFocusedCvIdx(idx)}
+                    onBlur={() => setFocusedCvIdx(null)}
+                    role="region"
+                    aria-label={`${item.degree} at ${item.institution}`}
+                  >
+                    <div className="timeline-marker">
+                      <span className="marker-dot" />
+                      <span className="marker-ring" />
+                    </div>
+                    
+                    <div className="cv-content-block">
+                      <div className="cv-header-line">
+                        <span className="cv-badge">{item.badge}</span>
+                        <span className="cv-inst">{item.institution}</span>
+                      </div>
+
+                      <h3 className="cv-degree-title">{item.degree}</h3>
+                      <p className="cv-details-p">{item.details}</p>
+
+                      <div className="cv-honor-row">
+                        <svg className="honor-check" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.2" />
+                          <path d="M5 8.2l2.2 2.2 4.1-4.4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span className="honor-text">{item.highlight}</span>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </section>
       </Reveal>
@@ -215,12 +238,30 @@ export function HomePage() {
                 high-accuracy decision logic.
               </p>
 
-              <div className="expertise-tags">
-                <span className="tag">Explainable AI (XAI)</span>
-                <span className="tag">Tree-based Ensembles</span>
-                <span className="tag">Logically Randomized Forests (LRF)</span>
-                <span className="tag">Reasonably Randomized Forests (XRRF)</span>
-                <span className="tag">Applied Machine Learning</span>
+              <div className="scholarly-tags-strip">
+                <span className="tags-label">Core Specializations</span>
+                <div className="scholarly-tags-list">
+                  <span className="scholarly-tag">
+                    <span className="tag-dot" />
+                    Explainable AI (XAI)
+                  </span>
+                  <span className="scholarly-tag">
+                    <span className="tag-dot" />
+                    Tree-based Ensembles
+                  </span>
+                  <span className="scholarly-tag">
+                    <span className="tag-dot" />
+                    Logically Randomized Forests (LRF)
+                  </span>
+                  <span className="scholarly-tag">
+                    <span className="tag-dot" />
+                    Reasonably Randomized Forests (XRRF)
+                  </span>
+                  <span className="scholarly-tag">
+                    <span className="tag-dot" />
+                    Applied Machine Learning
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -228,7 +269,7 @@ export function HomePage() {
       </Reveal>
 
       {/* ============================================================
-          RESEARCH AREAS & ALGORITHMIC INNOVATIONS
+          RESEARCH AREAS (Asymmetric Editorial Showcase)
           ============================================================ */}
       <Reveal>
         <section id="research" className="section research-section">
@@ -246,15 +287,60 @@ export function HomePage() {
             </a>
           </div>
 
-          <div className="research-cards-grid">
-            {researchAreas.map((area) => (
-              <article key={area.number} className="research-card">
-                <div className="research-card-num">{area.number}</div>
-                <h3 className="research-card-title">{area.title}</h3>
-                <p className="research-card-desc">{area.description}</p>
-                <div className="research-card-tag">Core Domain</div>
+          <div className="editorial-research-grid">
+            {/* Feature Card 01 - Large Lead Card */}
+            <article className="research-lead-card">
+              <div className="lead-card-head">
+                <svg className="research-monoline-icon" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                  <path d="M20 6v8M20 14l-9 9M20 14l9 9M11 23v7M29 23v7M7 30h8M25 30h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+                  <circle cx="20" cy="6" r="3" stroke="currentColor" strokeWidth="1.6" fill="var(--bg)"/>
+                  <circle cx="11" cy="23" r="2.5" stroke="currentColor" strokeWidth="1.6" fill="var(--bg)"/>
+                  <circle cx="29" cy="23" r="2.5" stroke="currentColor" strokeWidth="1.6" fill="var(--bg)"/>
+                </svg>
+                <span className="research-category-pill">PRIMARY RESEARCH FOCUS · LRF & XRRF</span>
+              </div>
+              <div className="lead-card-body">
+                <span className="research-area-num">DOMAIN 01</span>
+                <h3 className="lead-card-title">{researchAreas[0]?.title}</h3>
+                <p className="lead-card-desc">{researchAreas[0]?.description}</p>
+                <div className="research-key-metrics">
+                  <span>Novel LRF & XRRF Algorithms</span>
+                  <span className="metric-dot">·</span>
+                  <span>Published in Elsevier ESWA & Information Sciences</span>
+                </div>
+              </div>
+            </article>
+
+            {/* Split Subcards 02 & 03 */}
+            <div className="research-subcards-column">
+              <article className="research-subcard">
+                <div className="subcard-icon-row">
+                  <svg className="research-monoline-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <circle cx="16" cy="16" r="10" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3"/>
+                    <circle cx="16" cy="16" r="3" fill="currentColor"/>
+                    <circle cx="8" cy="12" r="2" fill="currentColor"/>
+                    <circle cx="24" cy="12" r="2" fill="currentColor"/>
+                    <circle cx="16" cy="26" r="2" fill="currentColor"/>
+                    <path d="M8 12l8 4 8-4M16 16v10" stroke="currentColor" strokeWidth="1.2"/>
+                  </svg>
+                  <span className="research-area-num">DOMAIN 02</span>
+                </div>
+                <h3 className="subcard-title">{researchAreas[1]?.title}</h3>
+                <p className="subcard-desc">{researchAreas[1]?.description}</p>
               </article>
-            ))}
+
+              <article className="research-subcard">
+                <div className="subcard-icon-row">
+                  <svg className="research-monoline-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <rect x="5" y="5" width="22" height="22" rx="4" stroke="currentColor" strokeWidth="1.5"/>
+                    <path d="M5 14h22M14 14v13M9 9.5h2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                  </svg>
+                  <span className="research-area-num">DOMAIN 03</span>
+                </div>
+                <h3 className="subcard-title">{researchAreas[2]?.title}</h3>
+                <p className="subcard-desc">{researchAreas[2]?.description}</p>
+              </article>
+            </div>
           </div>
         </section>
       </Reveal>
@@ -372,14 +458,14 @@ export function HomePage() {
               Open to collaborative research, student supervision inquiries, invited lectures, and peer review in Explainable AI and machine learning.
             </p>
 
-            <a href={`mailto:${profile.email}`} className="contact-main-email">
+            <a href={`mailto:${profile.email}`} className="contact-main-email corner-fill">
               <Mail size={20} />
               <span>{profile.email}</span>
               <ArrowRight size={18} className="email-arrow" />
             </a>
 
             <div className="contact-details-grid">
-              <div className="contact-detail-card">
+              <div className="contact-detail-card sweep-hover">
                 <Phone size={18} className="detail-icon" />
                 <div>
                   <strong>Phone</strong>
@@ -387,7 +473,7 @@ export function HomePage() {
                 </div>
               </div>
 
-              <div className="contact-detail-card">
+              <div className="contact-detail-card sweep-hover">
                 <MapPin size={18} className="detail-icon" />
                 <div>
                   <strong>Academic Office</strong>

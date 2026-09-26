@@ -1,31 +1,165 @@
-# Professor Portfolio
+# Dr. Nishant Jain | Academic Portfolio & Research Archive
 
-A responsive academic portfolio built with TanStack Start, React, TypeScript, and Tailwind CSS.
+[![Framework](https://img.shields.io/badge/Framework-TanStack%20Start-0ea5e9?style=flat-square)](https://tanstack.com/start)
+[![React](https://img.shields.io/badge/React-v19.2.0-61dafb?style=flat-square&logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-v5.8-3178c6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v4.2-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-## Run locally
+A modern, high-performance academic portfolio and scientific archive engineered for **Dr. Nishant Jain**, Assistant Professor in the Department of Computer Science & Design at **Madhav Institute of Technology & Science (MITS), Gwalior**, and Ph.D. alumnus of **IIT (ISM) Dhanbad**.
 
-```sh
+Built with **TanStack Start**, **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Lenis Smooth Scroll**, this portfolio balances scholarly prestige with contemporary digital craftsmanship.
+
+---
+
+## Key Features
+
+- **Prestigious Academic Editorial Design**: Custom-crafted warm museum paper (`#FAFAF7`) and burnished brass (`#9A6E24`) design system with editorial typography (Fraunces serif display, Inter sans-serif, and JetBrains Mono).
+- **Interactive Preloader**: Refined loading screen with numerical progression and keyboard skip capability (`[Esc]`).
+- **Smooth Momentum Scrolling**: Integrated Lenis scroll engine with zero-jank anchor offset navigation.
+- **Filterable Publications Archive (`/publications`)**: Real-time category filtering (Journals, Conferences, Under Review) with direct DOI links and citation badges.
+- **Student Mentorship Portal (`/students`)**: Dedicated research opportunities section covering B.Tech/M.Tech capstones, doctoral guidance, and inquiry criteria.
+- **Production SEO & Structured Data**: Complete OpenGraph, Twitter Cards, canonical tags, `sitemap.xml`, `robots.txt`, and Google JSON-LD `Person` schema markup.
+- **Accessible & Responsive**: Fully responsive layout optimized for desktop, tablet, and mobile with portrait-first hierarchy.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| **Fullstack Framework** | [TanStack Start](https://tanstack.com/start) (SSR & Server Functions via Nitro) |
+| **Routing** | [TanStack Router](https://tanstack.com/router) (Strictly typed file-based routing) |
+| **State & Data Fetching** | [TanStack Query](https://tanstack.com/query) |
+| **UI & Core** | React 19, TypeScript, Radix UI Primitives |
+| **Styling** | Vanilla CSS Design System + Tailwind CSS v4 |
+| **Motion & Scroll** | Lenis Momentum Scroll + CSS Keyframe Light Sweeps |
+| **Icons** | [Lucide React](https://lucide.dev) |
+| **Build Tooling** | Vite 8, Nitro, ESLint 9, Prettier |
+
+---
+
+## Project Structure
+
+```
+├── public/
+│   ├── cv.pdf               # Curriculum Vitae PDF download
+│   ├── favicon.svg          # Minimalist "NJ" vector favicon
+│   ├── robots.txt           # Search crawler directives
+│   └── sitemap.xml          # XML sitemap for SEO indexing
+├── src/
+│   ├── assets/              # Local images and portrait assets
+│   ├── components/
+│   │   ├── site/            # Site layout (Header, Footer, Preloader, HeroPortrait, etc.)
+│   │   └── ui/              # Reusable UI primitives (Button, Card, Dialog, etc.)
+│   ├── content/
+│   │   └── portfolio.ts     # Single source of truth for all profile, publications, & CV data
+│   ├── routes/
+│   │   ├── __root.tsx       # Root layout shell with HTML head, metadata, and providers
+│   │   ├── index.tsx        # Homepage (Hero, About, Research, Publications, CV, Contact)
+│   │   ├── publications.tsx # Full publication archive with filter tabs
+│   │   └── students.tsx     # Student mentorship and supervision tracks
+│   ├── styles.css           # Global typography, color variables, and animation system
+│   ├── router.tsx           # Router instance configuration
+│   └── server.ts            # SSR entry point and server-side error capture
+├── tsconfig.json            # Strict TypeScript configuration
+├── vite.config.ts           # Vite + TanStack Start configuration
+└── package.json             # Dependencies and build scripts
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js** (v18.18.0 or newer) or **Bun** (v1.1.0 or newer)
+- **npm**, **pnpm**, or **bun**
+
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+# Using npm
+npm install
+
+# Or using bun
 bun install
+```
+
+### Running Locally (Development)
+
+Start the local development server:
+
+```bash
+# Using npm
+npm run dev
+
+# Or using bun
 bun run dev
 ```
 
-Open `http://localhost:8080`.
+Open [http://localhost:8080](http://localhost:8080) in your browser.
 
-## Edit content
+---
 
-All demonstration biography, research, publication, teaching, student, award, service, and news records live in `src/content/portfolio.ts`. Replace them with verified details before publishing.
+## Available Scripts
 
-- Replace `src/assets/professor-portrait.jpg` with the professor's headshot, keeping the filename.
-- Replace `public/cv.pdf` with the current CV.
-- Update profile and contact links in `src/content/portfolio.ts`.
-- Add or edit records in the exported arrays; pages update automatically.
+| Command | Description |
+|---|---|
+| `npm run dev` | Starts the local development server on port 8080 |
+| `npm run build` | Compiles client and SSR bundles into `.output/` |
+| `npm run preview` | Runs local production preview of built assets |
+| `npm run lint` | Analyzes code for syntax and style violations with ESLint |
+| `npm run format` | Automatically formats codebase using Prettier |
 
-## Pages
+---
 
-- `/` — full portfolio
-- `/publications` — filterable publication archive
-- `/students` — current students and alumni
+## Content Customization Guide
 
-## Deploy
+All personal and academic information is centralized in **`src/content/portfolio.ts`**:
 
-Publish directly from Lovable, or connect the repository to a compatible static/serverless hosting provider. Run `bun run build` in external deployment pipelines.
+1. **Profile & Contact**:
+   Edit the `profile` object to update email, phone, affiliation, department, and bio.
+
+2. **Publications**:
+   Add or update items in the `publications` array with `title`, `authors`, `year`, `venue`, `doi`, `type`, and `featured` status.
+
+3. **Academic Qualifications & Experience**:
+   Modify the `qualifications`, `experience`, `recognition`, and `development` arrays.
+
+4. **Curriculum Vitae**:
+   Replace `public/cv.pdf` with the latest CV document.
+
+5. **Portrait Photo**:
+   Replace `src/assets/professor-portrait.png` with a high-resolution portrait.
+
+---
+
+## Production Deployment
+
+This project builds to standard **Nitro** server output in the `.output/` directory, compatible with multiple cloud platforms:
+
+### 1. Cloudflare Pages / Workers
+The default Nitro build preset targets Cloudflare Pages / Workers:
+```bash
+npm run build
+npx wrangler pages deploy .output/public
+```
+
+### 2. Vercel
+Connect your GitHub repository to Vercel. Framework preset is automatically detected via TanStack Start / Vite.
+
+### 3. Node.js Standalone Server
+Run the built server in standard Node environments:
+```bash
+npm run build
+node .output/server/index.mjs
+```
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

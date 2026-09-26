@@ -7,7 +7,7 @@ const nav = [
   { label: "About", id: "about", num: "01" },
   { label: "Research", id: "research", num: "02" },
   { label: "Publications", id: "publications", num: "03" },
-  { label: "Education", id: "education", num: "04" },
+  { label: "Qualifications", id: "qualifications", num: "04" },
   { label: "Experience", id: "experience", num: "05" },
   { label: "Recognition", id: "recognition", num: "06" },
   { label: "Contact", id: "contact", num: "07" },
@@ -39,6 +39,22 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  const scrollToSection = (id: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+    setOpen(false);
+    if (typeof window !== "undefined" && (window.location.pathname === "/" || window.location.pathname === "")) {
+      e.preventDefault();
+      const target = document.getElementById(id);
+      const lenis = (window as any).__lenis;
+      if (lenis && target) {
+        lenis.scrollTo(target, { offset: -70 });
+        window.history.pushState(null, "", `/#${id}`);
+      } else if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.pushState(null, "", `/#${id}`);
+      }
+    }
+  };
+
   return (
     <header className={`site-header ${open ? "menu-is-open" : ""}`}>
       <div className="header-inner">
@@ -53,12 +69,21 @@ export function SiteHeader() {
         {/* Desktop Navigation */}
         <nav className="desktop-nav" aria-label="Main navigation">
           {nav.map(({ label, id }) => (
-            <a key={id} href={`/#${id}`} className="nav-item">
+            <a 
+              key={id} 
+              href={`/#${id}`} 
+              className="nav-item"
+              onClick={(e) => scrollToSection(id, e)}
+            >
               {label}
             </a>
           ))}
-          <a href="#contact" className="nav-cta-btn">
-            Get in Touch
+          <a 
+            href="/#contact" 
+            className="nav-cta-btn corner-fill"
+            onClick={(e) => scrollToSection("contact", e)}
+          >
+            <span>Get in Touch</span>
           </a>
         </nav>
 
@@ -93,7 +118,7 @@ export function SiteHeader() {
                   key={id}
                   href={`/#${id}`}
                   className="mobile-nav-item"
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => scrollToSection(id, e)}
                 >
                   <span className="mobile-nav-num">{num}</span>
                   <span className="mobile-nav-label">{label}</span>
