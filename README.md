@@ -139,20 +139,45 @@ All personal and academic information is centralized in **`src/content/portfolio
 
 ## Production Deployment
 
-This project builds to standard **Nitro** server output in the `.output/` directory, compatible with multiple cloud platforms:
+### 1. Deploy on Vercel (Recommended)
 
-### 1. Cloudflare Pages / Workers
-The default Nitro build preset targets Cloudflare Pages / Workers:
+This project has native support for Vercel Serverless and Static hosting via Nitro.
+
+#### Steps to Deploy:
+1. **Push your code to GitHub**:
+   Ensure your latest changes are pushed to your GitHub repository:
+   ```bash
+   git add .
+   git commit -m "Deploy update"
+   git push origin main
+   ```
+2. **Import to Vercel**:
+   - Go to [vercel.com/new](https://vercel.com/new) and log in with your GitHub account.
+   - Select your repository: `Palash-r26/Portfolio-Nishant-Sir`.
+3. **Configure Project Settings**:
+   - **Framework Preset**: Select **`Vite`** or **`Other`**
+   - **Root Directory**: `./` (leave default)
+   - **Build Command**: `npm run build`
+   - **Output Directory**: Leave empty or `.vercel/output` (Nitro handles output automatically)
+4. **Environment Variables** (Under *Environment Variables* section in Vercel):
+   - **Key**: `NITRO_PRESET`
+   - **Value**: `vercel`
+5. **Click Deploy**:
+   Vercel will build and serve your site globally on a high-speed CDN with serverless SSR execution.
+
+---
+
+### 2. Deploy on Cloudflare Pages / Workers
+The project also supports Cloudflare Pages / Workers:
 ```bash
 npm run build
 npx wrangler pages deploy .output/public
 ```
 
-### 2. Vercel
-Connect your GitHub repository to Vercel. Framework preset is automatically detected via TanStack Start / Vite.
+---
 
 ### 3. Node.js Standalone Server
-Run the built server in standard Node environments:
+To run in a containerized environment (Docker / VPS):
 ```bash
 npm run build
 node .output/server/index.mjs
